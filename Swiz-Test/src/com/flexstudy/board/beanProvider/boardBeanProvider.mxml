@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" 
+				 xmlns:swiz="http://swiz.framework.org"
+				 xmlns:c="com.flexstudy.board.controller.*" 
+				 xmlns:m="com.flexstudy.board.model.*">
+	<fx:Declarations>
+		<!---
+		컨트롤 하는애
+		-->
+		<!-- 보드 기본 컨트롤러 -->
+		<c:BoardController id="boardController" />
+		
+		<!---
+		서비스들
+		-->
+		<!-- 리스트 가져오는 서비스 -->
+		<s:HTTPService id="listService"
+					   method="POST"
+					   resultFormat="e4x"
+					   url="http://bikinyboy.dothome.co.kr/board/boardList.php" />
+		<!-- 컨트츠 가져오는 서비스 -->
+		<s:HTTPService id="getContentService"
+					   method="POST"
+					   resultFormat="e4x"
+					   url="http://bikinyboy.dothome.co.kr/board/boardContent.php" />
+		<!---
+		모델들
+		-->
+		<!-- 리스트모델-->
+		<m:BoardListModel id="boardListModel" />
+		<!-- 화면 뷰 모델-->
+		<m:BoardViewModel id="boardViewModel" />
+	</fx:Declarations>
+</swiz:BeanProvider>

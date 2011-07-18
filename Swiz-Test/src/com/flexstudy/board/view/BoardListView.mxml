@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.flexstudy.board.event.BoardEvent;
+			import com.flexstudy.board.model.BoardListModel;
+			
+			import mx.controls.Alert;
+			import mx.controls.listClasses.IListItemRenderer;
+			import mx.events.ListEvent;
+			[Bindable]
+			[Inject]
+			/**
+			 * 
+			 */
+			public var boardListModel:BoardListModel;
+			
+			
+			[Dispatcher]
+			/**
+			 * 
+			 */
+			public var dispatcher:IEventDispatcher;
+			
+			
+			/**
+			 * 
+			 */
+			protected function datagrid1_itemClickHandler(event:ListEvent):void
+			{
+				var itemRen:IListItemRenderer = event.itemRenderer;
+				
+				if(itemRen)
+				{
+					var data:Object = itemRen.data;
+					if(data)
+					{
+						var contentEvent:BoardEvent = new BoardEvent(BoardEvent.GET_BOARD_CONTENT);
+						contentEvent.seq = data.seq;
+						contentEvent.bname = data.bname;
+						dispatcher.dispatchEvent(contentEvent);
+					}
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:DataGrid dataProvider="{boardListModel}"
+				 itemClick="datagrid1_itemClickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn dataField="seq" />
+			<mx:DataGridColumn dataField="title" />
+			<mx:DataGridColumn dataField="hit" />
+			<mx:DataGridColumn dataField="regdate" />
+		</mx:columns>
+	</mx:DataGrid>
+				 
+</s:Group>
